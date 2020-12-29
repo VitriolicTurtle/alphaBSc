@@ -1,0 +1,2 @@
+# alphaBSc
+α   Bachelor Task 
