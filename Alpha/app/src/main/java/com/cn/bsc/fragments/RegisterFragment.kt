@@ -8,28 +8,28 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.cn.bsc.R
+import com.cn.bsc.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class RegisterFragment : Fragment() {
-
+    private lateinit var binding: FragmentRegisterBinding
     private lateinit var auth: FirebaseAuth
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_register, container, false)
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
         // Initialize Firebase Auth
         auth = Firebase.auth
 
         // getting data from the text fields
-        val textFieldUsername = view.findViewById<EditText>(R.id.et_register_email)
-        val textFieldPassword = view.findViewById<EditText>(R.id.et_register_password)
-        val buttonRegister = view.findViewById<Button>(R.id.btn_register)
+        val textFieldUsername = binding.root.findViewById<EditText>(R.id.et_register_email)
+        val textFieldPassword = binding.root.findViewById<EditText>(R.id.et_register_password)
+        val buttonRegister = binding.root.findViewById<Button>(R.id.btn_register)
         buttonRegister.setOnClickListener(){
             val userEmail = textFieldUsername.text.toString()
             val password = textFieldPassword.text.toString()
@@ -63,9 +63,7 @@ class RegisterFragment : Fragment() {
  */
 
 
-
-        return view
-
+        return binding.root
     }
 
     private fun createUser(email: String, password: String) {

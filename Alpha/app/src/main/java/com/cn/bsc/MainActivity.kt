@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import com.cn.bsc.fragments.LoginFragment
 import com.cn.bsc.fragments.MainFragment
 import com.cn.bsc.fragments.RegisterFragment
@@ -16,23 +19,32 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.cn.bsc.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityMainBinding
 
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        ///setContentView(R.layout.activity_main)
+        //setSupportActionBar(binding.toolbar)
+
+        val navController = findNavController(R.id.nav_fragment)
+        val appBarConfig = AppBarConfiguration(navController.graph, binding.mainDrawerLayout)
 
 
-        val mF = MainFragment()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.flFragment, mF)
-        transaction.disallowAddToBackStack()
-        transaction.commit()
+        //binding.toolbar.setupWithNavController(navController, appBarConfig)
+        binding.navigationView.setupWithNavController(navController)
+        binding.bottomNav.setupWithNavController(navController)
 
 
     }
@@ -46,8 +58,5 @@ class MainActivity : AppCompatActivity() {
     }
      */
 
-
-
-
-
+    override fun onSupportNavigateUp() = findNavController(R.id.nav_fragment).navigateUp()
 }

@@ -9,31 +9,33 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.cn.bsc.MainActivity
 import com.cn.bsc.R
+import com.cn.bsc.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class LoginFragment : Fragment() {
 
+    private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         // Initialize Firebase Auth
         auth = Firebase.auth
 
         // getting data from the text fields
-        val textFieldUsername = view.findViewById<EditText>(R.id.et_login_email)
-        val textFieldPassword = view.findViewById<EditText>(R.id.et_login_password)
-        val buttonLogin = view.findViewById<Button>(R.id.loginButton)
+        val textFieldUsername = binding.root.findViewById<EditText>(R.id.et_login_email)
+        val textFieldPassword = binding.root.findViewById<EditText>(R.id.et_login_password)
+        val buttonLogin = binding.root.findViewById<Button>(R.id.loginButton)
         buttonLogin.setOnClickListener(){
             val userEmail = textFieldUsername.text.toString()
             val password = textFieldPassword.text.toString()
@@ -41,8 +43,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             login(userEmail, password)
         }
 
-        return view
-
+        return binding.root
     }
 
 
