@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -28,6 +29,7 @@ import com.cn.bsc.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var savedDarkData: sharedprefs
 
     private lateinit var auth: FirebaseAuth
 
@@ -45,6 +47,26 @@ class MainActivity : AppCompatActivity() {
         //binding.toolbar.setupWithNavController(navController, appBarConfig)
         binding.navigationView.setupWithNavController(navController)
         binding.bottomNav.setupWithNavController(navController)
+
+
+        savedDarkData = sharedprefs(this)
+        if(savedDarkData.loadDarkModeState() == true){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        //set red theme
+        if(savedDarkData.loadRedModeState() == true){
+            setTheme(R.style.RedTheme)
+        }else if(savedDarkData.loadGreenModeState() == true){
+            setTheme(R.style.GreenTheme)
+        }else if(savedDarkData.loadOrangeModeState() == true){
+            setTheme(R.style.OrangeTheme)
+        } else if(savedDarkData.loadPurpleModeState() == true){
+            setTheme(R.style.PurpleTheme)
+        } else{
+            setTheme((R.style.AppTheme))
+        }
 
 
     }
