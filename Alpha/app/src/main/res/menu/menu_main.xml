@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_home_black_24dp" />
 
     <item
-        android:id="@+id/dest_home"
+        android:id="@+id/dest_classroom_index"
         android:title="Classroom"
         android:icon="@drawable/ic_attach_money_black_24dp" />
 
