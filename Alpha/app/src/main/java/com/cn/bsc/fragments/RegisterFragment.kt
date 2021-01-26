@@ -1,6 +1,7 @@
 package com.cn.bsc.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,14 @@ import android.widget.Toast
 import com.cn.bsc.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class RegisterFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -37,33 +40,6 @@ class RegisterFragment : Fragment() {
             createUser(userEmail, password)
         }
 
-
-        /*
-        //val currentUser = mAuth!!.currentUser  // current user
-        val userScore = 2
-        val userName = "testing"
-
-        // current user ID
-        val userID = FirebaseAuth.getInstance().currentUser!!.uid
-
-
-
-        // Create a new user with a first and last name
-        val user = hashMapOf(
-                "userid" to userID,
-                "email" to userEmail,
-                "score" to 0
-        )
-
-        db.collection("users").document(userID)
-                .set(user)
-                .addOnSuccessListener { Log.d("Successfully added to DB", "DocumentSnapshot successfully written!") }
-                .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
-
- */
-
-
-
         return view
 
     }
@@ -72,7 +48,26 @@ class RegisterFragment : Fragment() {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
+                        // Sign in success
+                        val userID = FirebaseAuth.getInstance().currentUser!!.uid
+
+                        val userName = "testing"
+                        // Create a new user with a first and last name
+                        val user = hashMapOf(
+                                "userid" to userID,
+                                "email" to email,
+                                "name" to userName,
+                                "score" to 0
+                        )
+
+                        // add selected data to database
+                        db.collection("users").document(userID)
+                                .set(user)
+                                .addOnSuccessListener { Log.d("Successfully added to DB", "DocumentSnapshot successfully written!") }
+                                .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
+
+                        Firebase.auth.signOut()
+
                         Toast.makeText(activity,"User successfully created",Toast.LENGTH_SHORT).show()
                     } else {
                         // If sign in fails, display a message to the user.
@@ -80,6 +75,7 @@ class RegisterFragment : Fragment() {
                     }
                 }
     }
+
 
 
 }
