@@ -40,6 +40,7 @@ class RegisterFragment : Fragment() {
             createUser(userEmail, password)
         }
 
+
         return view
 
     }
@@ -49,31 +50,54 @@ class RegisterFragment : Fragment() {
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
                         // Sign in success
-                        val userID = FirebaseAuth.getInstance().currentUser!!.uid
 
-                        val userName = "testing"
-                        // Create a new user with a first and last name
-                        val user = hashMapOf(
-                                "userid" to userID,
-                                "email" to email,
-                                "name" to userName,
-                                "score" to 0
+                        val city = hashMapOf(
+                                "name" to "Los Angeles",
+                                "state" to "CA",
+                                "country" to "USA"
                         )
 
-                        // add selected data to database
-                        db.collection("users").document(userID)
-                                .set(user)
+                        db.collection("cities").document("LA")
+                                .set(city)
                                 .addOnSuccessListener { Log.d("Successfully added to DB", "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
 
-                        Firebase.auth.signOut()
 
+                        createDatabaseEntry(email)
                         Toast.makeText(activity,"User successfully created",Toast.LENGTH_SHORT).show()
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(activity,"Error registering user!",Toast.LENGTH_SHORT).show()
                     }
                 }
+    }
+
+    private fun createDatabaseEntry(email: String) {
+
+        val userID = FirebaseAuth.getInstance().currentUser!!.uid
+        val userName = "testing"
+        // Create a new user entry in the database
+        val user = hashMapOf(
+                "userid" to userID,
+                "email" to email,
+                "name" to userName,
+                "score" to 0
+        )
+
+        // add selected data to database
+        db.collection("users").document(userID)
+                .set(user)
+                .addOnSuccessListener { Log.d("Successfully added to DB", "DocumentSnapshot successfully written!") }
+                .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        Toast.makeText(activity,"Database entry created!",Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(activity,"Database entry failed!",Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+        Firebase.auth.signOut()
     }
 
 
