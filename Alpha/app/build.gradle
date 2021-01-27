@@ -42,6 +42,8 @@ android {
     }
 }
 
+def ev_version = "1.0.1"
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -71,4 +73,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Core for Easy Validation
+    implementation "com.wajahatkarim3.easyvalidation:easyvalidation-core:$ev_version"
 }
