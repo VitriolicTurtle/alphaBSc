@@ -38,6 +38,7 @@ class RegisterFragment : Fragment() {
             val password = textFieldPassword.text.toString()
             // logging in using the data entered in the text fields
             createUser(userEmail, password)
+            auth.signOut()
         }
 
 
@@ -50,19 +51,6 @@ class RegisterFragment : Fragment() {
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
                         // Sign in success
-
-                        val city = hashMapOf(
-                                "name" to "Los Angeles",
-                                "state" to "CA",
-                                "country" to "USA"
-                        )
-
-                        db.collection("cities").document("LA")
-                                .set(city)
-                                .addOnSuccessListener { Log.d("Successfully added to DB", "DocumentSnapshot successfully written!") }
-                                .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
-
-
                         createDatabaseEntry(email)
                         Toast.makeText(activity,"User successfully created",Toast.LENGTH_SHORT).show()
                     } else {
@@ -96,8 +84,6 @@ class RegisterFragment : Fragment() {
                         Toast.makeText(activity,"Database entry failed!",Toast.LENGTH_SHORT).show()
                     }
                 }
-
-        Firebase.auth.signOut()
     }
 
 
