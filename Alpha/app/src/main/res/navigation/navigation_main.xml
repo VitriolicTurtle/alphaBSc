@@ -28,7 +28,17 @@
         android:id="@+id/dest_login"
         android:name="com.cn.bsc.fragments.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_user"
+            app:destination="@id/dest_user" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dest_user"
+        android:name="com.cn.bsc.fragments.UserFragment"
+        android:label="User screen"
+        tools:layout="@layout/fragment_user" />
 
     <fragment
         android:id="@+id/dest_classroom_index"
