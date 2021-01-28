@@ -56,19 +56,20 @@
             android:id="@+id/user_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="email"
+            android:text=""
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/user_score"
-            app:layout_constraintTop_toBottomOf="@+id/user_score" />
+            app:layout_constraintStart_toStartOf="@+id/user_score"
+            app:layout_constraintTop_toBottomOf="@+id/user_score"
+            app:layout_constraintRight_toRightOf="@id/label_email"/>
 
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
-            android:text="name"
+            android:text=""
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/user_score"
@@ -80,7 +81,7 @@
             android:id="@+id/user_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="score"
+            android:text=""
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/user_email"
