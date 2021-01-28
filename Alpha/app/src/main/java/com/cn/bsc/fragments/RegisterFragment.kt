@@ -50,10 +50,11 @@ class RegisterFragment : Fragment() {
                     if (task.isSuccessful) {
                         // Sign in success
                         createDatabaseEntry(email)
-                        Toast.makeText(activity,"User successfully created",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity,"User successfully created!",Toast.LENGTH_SHORT).show()
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(activity,"Error registering user!",Toast.LENGTH_SHORT).show()
+                        Log.w("Failed to create new user", "Error creating new user")
                     }
                 }
     }
@@ -75,13 +76,6 @@ class RegisterFragment : Fragment() {
                 .set(user)
                 .addOnSuccessListener { Log.d("Successfully added to DB", "DocumentSnapshot successfully written!") }
                 .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful){
-                        Toast.makeText(activity,"Database entry created!",Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(activity,"Database entry failed!",Toast.LENGTH_SHORT).show()
-                    }
-                }
     }
 
 }    
