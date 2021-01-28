@@ -48,8 +48,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-
-
+    // function to login user using input values from user
     private fun login(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
@@ -61,6 +60,7 @@ class LoginFragment : Fragment() {
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(activity,"Login failed!",Toast.LENGTH_SHORT).show()
+                        Log.w("Failed to log in", "Error logging in to specified user")
                     }
                 }
     }

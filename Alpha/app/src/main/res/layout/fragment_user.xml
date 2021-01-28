@@ -8,10 +8,6 @@
         android:layout_height="match_parent"
         tools:ignore="ExtraText"><![CDATA[
         tools:context=".fragments.UserFragment">
-
-
-
-
         ]]>
 
         <TextView
