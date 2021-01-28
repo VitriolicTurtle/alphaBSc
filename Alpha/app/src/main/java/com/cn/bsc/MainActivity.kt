@@ -1,28 +1,11 @@
 package com.cn.bsc
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import com.cn.bsc.fragments.LoginFragment
-import com.cn.bsc.fragments.MainFragment
-import com.cn.bsc.fragments.RegisterFragment
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cn.bsc.databinding.ActivityMainBinding
 
@@ -67,10 +50,7 @@ class MainActivity : AppCompatActivity() {
         } else{
             setTheme((R.style.AppTheme))
         }
-
-
     }
-
 
     /*
     public override fun onStart() {
@@ -81,4 +61,5 @@ class MainActivity : AppCompatActivity() {
      */
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_fragment).navigateUp()
+
 }

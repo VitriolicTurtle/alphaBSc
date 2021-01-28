@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
-    private val db = FirebaseFirestore.getInstance()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -54,6 +54,8 @@ class LoginFragment : Fragment() {
                 ) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
+
+
                         Toast.makeText(activity,"Logged in!",Toast.LENGTH_SHORT).show()
                     } else {
                         // If sign in fails, display a message to the user.
@@ -61,6 +63,7 @@ class LoginFragment : Fragment() {
                     }
                 }
     }
+
 
 
 

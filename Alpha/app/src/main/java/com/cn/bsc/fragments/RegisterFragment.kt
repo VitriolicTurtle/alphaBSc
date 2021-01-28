@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var auth: FirebaseAuth
-
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -40,45 +39,17 @@ class RegisterFragment : Fragment() {
             val password = textFieldPassword.text.toString()
             // logging in using the data entered in the text fields
             createUser(userEmail, password)
+            auth.signOut()
         }
-
-
-
-
-
-
         return binding.root
-    }
+   }     
 
     private fun createUser(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
-
-                        //val currentUser = mAuth!!.currentUser  // current user
-                        val userScore = 2
-                        val userName = "testing"
-
-                        // current user ID
-                        val userID = FirebaseAuth.getInstance().currentUser!!.uid
-
-
-                        // Create a new user with a first and last name
-                        val user = hashMapOf(
-                            "userid" to userID,
-                            "email" to email,
-                            "score" to 0
-                        )
-
-                        db.collection("users").document(userID)
-                            .set(user)
-                            .addOnSuccessListener { Log.d("Successfully added to DB", "DocumentSnapshot successfully written!") }
-                            .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
-
-
-
-
-                        // Sign in success, update UI with the signed-in user's information
+                        // Sign in success
+                        createDatabaseEntry(email)
                         Toast.makeText(activity,"User successfully created",Toast.LENGTH_SHORT).show()
                     } else {
                         // If sign in fails, display a message to the user.
@@ -87,5 +58,30 @@ class RegisterFragment : Fragment() {
                 }
     }
 
+    private fun createDatabaseEntry(email: String) {
 
-}
+        val userID = FirebaseAuth.getInstance().currentUser!!.uid
+        val userName = "testing"
+        // Create a new user entry in the database
+        val user = hashMapOf(
+                "userid" to userID,
+                "email" to email,
+                "name" to userName,
+                "score" to 0
+        )
+
+        // add selected data to database
+        db.collection("users").document(userID)
+                .set(user)
+                .addOnSuccessListener { Log.d("Successfully added to DB", "DocumentSnapshot successfully written!") }
+                .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        Toast.makeText(activity,"Database entry created!",Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(activity,"Database entry failed!",Toast.LENGTH_SHORT).show()
+                    }
+                }
+    }
+
+}    
