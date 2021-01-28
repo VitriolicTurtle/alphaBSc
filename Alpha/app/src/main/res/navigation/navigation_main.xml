@@ -34,9 +34,6 @@
         tools:layout="@layout/fragment_login"/>
 
 
-
-
-
     <fragment
         android:id="@+id/dest_classroom_index"
         android:name="com.cn.bsc.fragments.ClassroomIndexFragment"
