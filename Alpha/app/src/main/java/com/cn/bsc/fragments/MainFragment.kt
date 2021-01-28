@@ -24,7 +24,6 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
-
         val goToLogin = binding.root.findViewById<Button>(R.id.btnLogin)
         val goToRegister = binding.root.findViewById<Button>(R.id.btnRegister)
 
