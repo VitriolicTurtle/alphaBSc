@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.cn.bsc.MainActivity
 import com.cn.bsc.R
 import com.cn.bsc.databinding.FragmentLoginBinding
@@ -43,13 +44,13 @@ class LoginFragment : Fragment() {
             val password = textFieldPassword.text.toString()
             // logging in using the data entered in the text fields
             login(userEmail, password)
+
         }
 
         return binding.root
     }
 
-
-
+    // function to login user using input values from user
     private fun login(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
@@ -62,9 +63,11 @@ class LoginFragment : Fragment() {
                         menu.findItem(R.id.dest_profile).setVisible(true)
                         menu.findItem(R.id.dest_settings).setVisible(true)
                         Toast.makeText(activity,"Logged in!",Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.dest_user)
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(activity,"Login failed!",Toast.LENGTH_SHORT).show()
+                        Log.w("Failed to log in", "Error logging in to specified user")
                     }
                 }
     }
