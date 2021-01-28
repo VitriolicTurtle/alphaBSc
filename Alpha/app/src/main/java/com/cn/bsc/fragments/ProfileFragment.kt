@@ -20,7 +20,6 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
-
         // get current user id
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
 
@@ -51,5 +50,4 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-
 }
