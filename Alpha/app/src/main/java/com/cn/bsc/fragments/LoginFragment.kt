@@ -26,7 +26,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
-
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -72,8 +72,36 @@ class LoginFragment : Fragment() {
                 }
     }
 
+                        // get current user id
+                        val userID = FirebaseAuth.getInstance().currentUser!!.uid
+                        db.collection("users").document(userID).get().addOnCompleteListener() { task ->
+                            if (task.isSuccessful) {
+                                // if query is successful, reads the data and stores in variables
+                                val res = task.result?.get("teacher")
+
+                                // check if user logging in is teacher or student
+                                if (res as Boolean) {
+                                    // Sign in success, update UI with the signed-in teacher's information
+                                    Toast.makeText(activity, "Logged in as teacher!", Toast.LENGTH_SHORT).show()
+                                    findNavController().navigate(R.id.dest_user)
+                                } else {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Toast.makeText(activity, "Logged in as student!", Toast.LENGTH_SHORT).show()
+                                    findNavController().navigate(R.id.dest_user)
+                                }
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(activity, "Login failed!", Toast.LENGTH_SHORT).show()
+                                Log.w("Failed to log in", "Error logging in to specified user")
+                            }
+                        }
 
 
+                    }
+
+
+                }
+    }
 
 
 }
