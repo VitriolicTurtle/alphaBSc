@@ -62,15 +62,6 @@ class LoginFragment : Fragment() {
                         menu.findItem(R.id.dest_classroom_index).setVisible(true)
                         menu.findItem(R.id.dest_profile).setVisible(true)
                         menu.findItem(R.id.dest_settings).setVisible(true)
-                        Toast.makeText(activity,"Logged in!",Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.dest_user)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(activity,"Login failed!",Toast.LENGTH_SHORT).show()
-                        Log.w("Failed to log in", "Error logging in to specified user")
-                    }
-                }
-    }
 
                         // get current user id
                         val userID = FirebaseAuth.getInstance().currentUser!!.uid
@@ -96,12 +87,14 @@ class LoginFragment : Fragment() {
                             }
                         }
 
-
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(activity,"Login failed!",Toast.LENGTH_SHORT).show()
+                        Log.w("Failed to log in", "Error logging in to specified user")
                     }
-
-
                 }
     }
+
 
 
 }
