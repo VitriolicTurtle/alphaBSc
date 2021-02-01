@@ -31,10 +31,6 @@
         android:id="@+id/dest_login"
         android:name="com.cn.bsc.fragments.LoginFragment"
         android:label="Login"
-<<<<<<< HEAD
-        tools:layout="@layout/fragment_login"/>
-
-=======
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_login_to_user"
@@ -46,7 +42,6 @@
         android:name="com.cn.bsc.fragments.UserFragment"
         android:label="User screen"
         tools:layout="@layout/fragment_user" />
->>>>>>> 750d991e6c75ad5415a5b82c6cbe76e876f131a1
 
     <fragment
         android:id="@+id/dest_classroom_index"
