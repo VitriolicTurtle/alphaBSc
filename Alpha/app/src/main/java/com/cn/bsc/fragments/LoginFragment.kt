@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
         val textFieldUsername = binding.root.findViewById<EditText>(R.id.et_login_email)
         val textFieldPassword = binding.root.findViewById<EditText>(R.id.et_login_password)
         val buttonLogin = binding.root.findViewById<Button>(R.id.loginButton)
-        buttonLogin.setOnClickListener(){
+        buttonLogin.setOnClickListener() {
             val userEmail = textFieldUsername.text.toString()
             val password = textFieldPassword.text.toString()
             // logging in using the data entered in the text fields
@@ -56,20 +56,13 @@ class LoginFragment : Fragment() {
                 .addOnCompleteListener(
                 ) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        (activity as MainActivity?)!!.bottom_nav.visibility = View.VISIBLE
-                        val menu = (activity as MainActivity?)!!.navigation_view.menu
-                        menu.findItem(R.id.dest_classroom_index).setVisible(true)
-                        menu.findItem(R.id.dest_profile).setVisible(true)
-                        menu.findItem(R.id.dest_settings).setVisible(true)
-
+                        // Sign in success
                         // get current user id
                         val userID = FirebaseAuth.getInstance().currentUser!!.uid
                         db.collection("users").document(userID).get().addOnCompleteListener() { task ->
                             if (task.isSuccessful) {
                                 // if query is successful, reads the data and stores in variables
                                 val res = task.result?.get("teacher")
-
                                 // check if user logging in is teacher or student
                                 if (res as Boolean) {
                                     // Sign in success, update UI with the signed-in teacher's information
@@ -81,20 +74,27 @@ class LoginFragment : Fragment() {
                                     findNavController().navigate(R.id.dest_user)
                                 }
                             } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(activity, "Login failed!", Toast.LENGTH_SHORT).show()
-                                Log.w("Failed to log in", "Error logging in to specified user")
+                                // database read fail
+                                Log.w("Failed to read database", "Error checking specified user in database")
                             }
                         }
-
+                        setNavBar()
                     } else {
                         // If sign in fails, display a message to the user.
-                        Toast.makeText(activity,"Login failed!",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Login failed!", Toast.LENGTH_SHORT).show()
                         Log.w("Failed to log in", "Error logging in to specified user")
                     }
                 }
     }
 
+    // set navigation bar to visible
+    private fun setNavBar() {
+        (activity as MainActivity?)!!.bottom_nav.visibility = View.VISIBLE
+        val menu = (activity as MainActivity?)!!.navigation_view.menu
+        menu.findItem(R.id.dest_classroom_index).setVisible(true)
+        menu.findItem(R.id.dest_profile).setVisible(true)
+        menu.findItem(R.id.dest_settings).setVisible(true)
+    }
 
 
 }
