@@ -32,6 +32,7 @@ class LoginFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+
         // Initialize Firebase Auth
         auth = Firebase.auth
 
@@ -43,8 +44,11 @@ class LoginFragment : Fragment() {
             val userEmail = textFieldUsername.text.toString()
             val password = textFieldPassword.text.toString()
             // logging in using the data entered in the text fields
-            login(userEmail, password)
-
+            if (userEmail != "" && password != "") {
+                login(userEmail, password)
+            } else {
+                Toast.makeText(activity, "Username or password can't be empty!", Toast.LENGTH_LONG).show()
+            }
         }
 
         return binding.root

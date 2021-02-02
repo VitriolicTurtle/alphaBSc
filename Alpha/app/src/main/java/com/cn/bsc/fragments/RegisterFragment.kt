@@ -28,9 +28,9 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
+
         // Initialize Firebase Auth
         auth = Firebase.auth
-
 
         // getting data from the text fields
         val textFieldUsername = binding.root.findViewById<EditText>(R.id.et_register_email)
@@ -38,14 +38,19 @@ class RegisterFragment : Fragment() {
         val textFieldName = binding.root.findViewById<EditText>(R.id.et_register_name)
         val checkBox = binding.root.findViewById<CheckBox>(R.id.cb_isTeacher)
         val buttonRegister = binding.root.findViewById<Button>(R.id.btn_register)
+
         buttonRegister.setOnClickListener(){
             val userEmail = textFieldUsername.text.toString()
             val password = textFieldPassword.text.toString()
             val name = textFieldName.text.toString()
             val isTeacher = checkBox.isChecked
             // logging in using the data entered in the text fields
-            createUser(userEmail, password, name, isTeacher)
-            auth.signOut()
+            if (userEmail != "" && password != "" && name != "") {
+                createUser(userEmail, password, name, isTeacher)
+                auth.signOut()
+            } else {
+                Toast.makeText(activity, "Please fill all the fields!", Toast.LENGTH_LONG).show()
+            }
         }
         return binding.root
    }     
