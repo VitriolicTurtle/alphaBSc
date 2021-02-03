@@ -28,9 +28,9 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
+
         // Initialize Firebase Auth
         auth = Firebase.auth
-
 
         // getting data from the text fields
         val textFieldUsername = binding.root.findViewById<EditText>(R.id.et_register_email)
@@ -38,20 +38,29 @@ class RegisterFragment : Fragment() {
         val textFieldName = binding.root.findViewById<EditText>(R.id.et_register_name)
         val checkBox = binding.root.findViewById<CheckBox>(R.id.cb_isTeacher)
         val buttonRegister = binding.root.findViewById<Button>(R.id.btn_register)
+
         buttonRegister.setOnClickListener(){
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                // if someone is already signed in, sign them out
+                auth.signOut()
+            }
             val userEmail = textFieldUsername.text.toString()
             val password = textFieldPassword.text.toString()
             val name = textFieldName.text.toString()
             val isTeacher = checkBox.isChecked
             // logging in using the data entered in the text fields
-            createUser(userEmail, password, name, isTeacher)
-            auth.signOut()
+            if (userEmail != "" && password != "" && name != "") {
+                createUser(userEmail, password, name, isTeacher)
+                auth.signOut()
+            } else {
+                Toast.makeText(activity, "Please fill all the fields!", Toast.LENGTH_LONG).show()
+            }
         }
         return binding.root
    }     
 
     private fun createUser(email: String, password: String, name: String, isTeacher: Boolean) {
-
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
@@ -68,7 +77,6 @@ class RegisterFragment : Fragment() {
     }
 
     private fun createDatabaseEntry(email: String, name: String, isTeacher: Boolean) {
-
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
         // Create a new user entry in the database
         val user = hashMapOf(
@@ -78,7 +86,6 @@ class RegisterFragment : Fragment() {
                 "score" to 0,
                 "teacher" to isTeacher
         )
-
         // add selected data to database
         db.collection("users").document(userID)
                 .set(user)
