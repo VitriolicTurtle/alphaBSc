@@ -85,7 +85,7 @@ class LoginFragment : Fragment() {
                         setNavBar()
                     } else {
                         // If sign in fails, display a message to the user.
-                        Toast.makeText(activity, "Login failed!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity,"Login failed!",Toast.LENGTH_SHORT).show()
                         Log.w("Failed to log in", "Error logging in to specified user")
                     }
                 }
@@ -99,6 +99,7 @@ class LoginFragment : Fragment() {
         menu.findItem(R.id.dest_profile).setVisible(true)
         menu.findItem(R.id.dest_settings).setVisible(true)
     }
+
 
 
 }
