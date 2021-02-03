@@ -1,6 +1,7 @@
 package com.cn.bsc
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
@@ -8,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.ui.setupWithNavController
 import com.cn.bsc.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,10 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 
         /*      change this after sessions have been made */
-        val menu = binding.navigationView.menu
-        menu.findItem(R.id.dest_classroom_index).setVisible(false)
-        menu.findItem(R.id.dest_profile).setVisible(false)
-        menu.findItem(R.id.dest_settings).setVisible(false)
+        this.hideMenu()
 
 
         savedDarkData = sharedprefs(this)
@@ -70,5 +69,21 @@ class MainActivity : AppCompatActivity() {
 */
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_fragment).navigateUp()
+
+    fun showMenu(){
+        this.bottom_nav.visibility = View.VISIBLE
+        val menu = this.navigation_view.menu
+        menu.findItem(R.id.dest_classroom_index).isVisible = true
+        menu.findItem(R.id.dest_profile).isVisible = true
+        menu.findItem(R.id.dest_settings).isVisible = true
+    }
+
+    fun hideMenu(){
+        this.bottom_nav.visibility = View.INVISIBLE
+        val menu = this.navigation_view.menu
+        menu.findItem(R.id.dest_classroom_index).isVisible = false
+        menu.findItem(R.id.dest_profile).isVisible = false
+        menu.findItem(R.id.dest_settings).isVisible = false
+    }
 
 }

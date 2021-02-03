@@ -57,11 +57,9 @@ class LoginFragment : Fragment() {
                 ) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        (activity as MainActivity?)!!.bottom_nav.visibility = View.VISIBLE
-                        val menu = (activity as MainActivity?)!!.navigation_view.menu
-                        menu.findItem(R.id.dest_classroom_index).setVisible(true)
-                        menu.findItem(R.id.dest_profile).setVisible(true)
-                        menu.findItem(R.id.dest_settings).setVisible(true)
+                        (activity as MainActivity?)!!.showMenu()
+
+
                         Toast.makeText(activity,"Logged in!",Toast.LENGTH_SHORT).show()
                         findNavController().navigate(R.id.dest_user)
                     } else {
