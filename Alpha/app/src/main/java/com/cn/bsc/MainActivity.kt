@@ -2,24 +2,27 @@ package com.cn.bsc
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.ui.setupWithNavController
 import com.cn.bsc.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var savedDarkData: sharedprefs
 
-    private lateinit var auth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ///setContentView(R.layout.activity_main)
@@ -33,10 +36,8 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navController)
         binding.bottomNav.setupWithNavController(navController)
 
-
         /*      change this after sessions have been made */
-        this.hideMenu()
-
+        //this.hideMenu()
 
         savedDarkData = sharedprefs(this)
         if(savedDarkData.loadDarkModeState() == true){
@@ -57,16 +58,6 @@ class MainActivity : AppCompatActivity() {
             setTheme((R.style.AppTheme))
         }
     }
-
-/*
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-
-
-    }
-*/
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_fragment).navigateUp()
 
