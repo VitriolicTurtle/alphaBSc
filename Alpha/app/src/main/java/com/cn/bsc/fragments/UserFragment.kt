@@ -48,7 +48,6 @@ class UserFragment : Fragment() {
 
     // function that retrieves data from user database and displays it
     private fun readData(userID: String) {
-
         // making the query
         db.collection("users").document(userID).get().addOnCompleteListener() { task ->
             if (task.isSuccessful) {
@@ -64,11 +63,8 @@ class UserFragment : Fragment() {
                 userName.text = name.toString()
                 userEmail.text = email.toString()
                 userScore.text = score.toString()
-
             }
-
         }
-
     }
 
     // old function for getting data from FireStore
@@ -76,11 +72,9 @@ class UserFragment : Fragment() {
         db.collection("users")
                 .get()
                 .addOnCompleteListener() {
-
                     var name = ""
                     var email = ""
                     var score = -1
-
                     if (it.isSuccessful) {
                         for (document in it.result!!) {
                             if (document.data.getValue("userid").toString() == userID) {
@@ -90,7 +84,6 @@ class UserFragment : Fragment() {
                             }
                         }
                     }
-
                     val userName = binding.root.findViewById<TextView>(R.id.user_name)
                     val userEmail = binding.root.findViewById<TextView>(R.id.user_email)
                     val userScore = binding.root.findViewById<TextView>(R.id.user_score)
@@ -98,7 +91,6 @@ class UserFragment : Fragment() {
                     userName.text = name
                     userEmail.text = email
                     userScore.text = score.toString()
-
                 }
     }
 

@@ -18,12 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var savedDarkData: sharedprefs
 
-    private lateinit var auth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Initialize Firebase Auth
-        auth = Firebase.auth
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,13 +34,11 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navController)
         binding.bottomNav.setupWithNavController(navController)
 
-
         /*      change this after sessions have been made */
         val menu = binding.navigationView.menu
         menu.findItem(R.id.dest_classroom_index).setVisible(false)
         menu.findItem(R.id.dest_profile).setVisible(false)
         menu.findItem(R.id.dest_settings).setVisible(false)
-
 
         savedDarkData = sharedprefs(this)
         if(savedDarkData.loadDarkModeState() == true){
@@ -65,18 +59,6 @@ class MainActivity : AppCompatActivity() {
             setTheme((R.style.AppTheme))
         }
     }
-
-
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            //findNavController().navigate(R.id.dest_user)
-
-        }
-    }
-
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_fragment).navigateUp()
 

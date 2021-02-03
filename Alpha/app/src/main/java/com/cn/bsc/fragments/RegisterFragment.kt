@@ -40,6 +40,11 @@ class RegisterFragment : Fragment() {
         val buttonRegister = binding.root.findViewById<Button>(R.id.btn_register)
 
         buttonRegister.setOnClickListener(){
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                // if someone is already signed in, sign them out
+                auth.signOut()
+            }
             val userEmail = textFieldUsername.text.toString()
             val password = textFieldPassword.text.toString()
             val name = textFieldName.text.toString()
@@ -56,7 +61,6 @@ class RegisterFragment : Fragment() {
    }     
 
     private fun createUser(email: String, password: String, name: String, isTeacher: Boolean) {
-
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
@@ -73,7 +77,6 @@ class RegisterFragment : Fragment() {
     }
 
     private fun createDatabaseEntry(email: String, name: String, isTeacher: Boolean) {
-
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
         // Create a new user entry in the database
         val user = hashMapOf(
@@ -83,7 +86,6 @@ class RegisterFragment : Fragment() {
                 "score" to 0,
                 "teacher" to isTeacher
         )
-
         // add selected data to database
         db.collection("users").document(userID)
                 .set(user)
