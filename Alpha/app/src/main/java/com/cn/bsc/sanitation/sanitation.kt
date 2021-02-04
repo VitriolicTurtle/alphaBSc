@@ -7,6 +7,6 @@ class Sanitation {
     var emailStr = "john.doe@gmail.com"
     var isValid = emailStr.validEmail()
 
-    
+
 
 }
