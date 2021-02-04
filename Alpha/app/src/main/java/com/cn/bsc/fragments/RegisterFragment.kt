@@ -67,7 +67,7 @@ class RegisterFragment : Fragment() {
                         // Sign in success
                         createDatabaseEntry(email, name, isTeacher)
                         Toast.makeText(activity,"User successfully created!",Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.dest_start)
+                        findNavController().navigate(R.id.dest_user)
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(activity,"Error registering user!",Toast.LENGTH_SHORT).show()
