@@ -8,13 +8,25 @@
         android:layout_height="match_parent"
         tools:ignore="ExtraText"><![CDATA[
         tools:context=".fragments.UserFragment">
+
+
+
+
+
+
+
+
+
+
+
+
         ]]>
 
         <ScrollView
-            android:layout_width="345dp"
-            android:layout_height="146dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginBottom="108dp"
+            android:layout_width="337dp"
+            android:layout_height="153dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -22,8 +34,8 @@
             android:id="@+id/scrollView2"
             android:layout_width="345dp"
             android:layout_height="146dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginBottom="372dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="348dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -43,7 +55,7 @@
             android:layout_width="231dp"
             android:layout_height="42dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="32dp"
             android:text="Group list"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,8 +75,8 @@
         <SearchView
             android:layout_width="345dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="44dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="48dp"
             android:background="@drawable/textview_border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -72,8 +84,8 @@
         <SearchView
             android:layout_width="345dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="44dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="48dp"
             android:background="@drawable/textview_border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />

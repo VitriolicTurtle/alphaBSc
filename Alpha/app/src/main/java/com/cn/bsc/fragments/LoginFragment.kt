@@ -57,7 +57,7 @@ class LoginFragment : Fragment() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Toast.makeText(activity,"Logged in!",Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.dest_user)
+                        findNavController().navigate(R.id.dest_user_profile)
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(activity,"Login failed!",Toast.LENGTH_SHORT).show()

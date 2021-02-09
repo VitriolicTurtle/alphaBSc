@@ -11,7 +11,7 @@
     <string name="login_failed">"Login failed"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="dark_mode">darkMode</string>
+    <string name="dark_mode">  DarkMode</string>
     <string name="settings">Settings</string>
     <string name="red_theme">Red Theme</string>
     <string name="green_theme">Green Theme</string>

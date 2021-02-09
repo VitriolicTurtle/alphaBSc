@@ -1,13 +1,13 @@
 package com.cn.bsc.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.cn.bsc.MainActivity
 import com.cn.bsc.R
 import com.cn.bsc.databinding.FragmentSettingBinding
@@ -54,10 +54,7 @@ class SettingFragment : Fragment() {
             savedDarkData.setPurpleModeState(false)
             savedDarkData.setGreenModeState(false)
             savedDarkData.setOrangeModeState(false)
-            val toast = Toast.makeText(requireContext() as MainActivity, "Please restart the app to apply the Red theme", Toast.LENGTH_SHORT)
-            toast.show()
-
-
+            (activity as MainActivity).recreate();
         }
 
         button2.setOnClickListener{
@@ -67,9 +64,7 @@ class SettingFragment : Fragment() {
             savedDarkData.setPurpleModeState(false)
             savedDarkData.setGreenModeState(true)
             savedDarkData.setOrangeModeState(false)
-            val toast = Toast.makeText(requireContext() as MainActivity, "Please restart the app to apply the Green theme", Toast.LENGTH_SHORT)
-            toast.show()
-
+            (activity as MainActivity).recreate();
         }
 
         button3.setOnClickListener{
@@ -79,9 +74,7 @@ class SettingFragment : Fragment() {
             savedDarkData.setPurpleModeState(true)
             savedDarkData.setGreenModeState(false)
             savedDarkData.setOrangeModeState(false)
-
-            val toast = Toast.makeText(requireContext() as MainActivity, "Please restart the app to apply the Purple theme", Toast.LENGTH_SHORT)
-            toast.show()
+            (activity as MainActivity).recreate();
 
         }
 
@@ -92,9 +85,7 @@ class SettingFragment : Fragment() {
             savedDarkData.setOrangeModeState(true)
             savedDarkData.setGreenModeState(false)
             savedDarkData.setPurpleModeState(false)
-            val toast = Toast.makeText(requireContext() as MainActivity, "Please restart the app to apply the Orange theme", Toast.LENGTH_SHORT)
-            toast.show()
-
+            (activity as MainActivity).recreate();
         }
 
         button5.setOnClickListener{
@@ -104,9 +95,7 @@ class SettingFragment : Fragment() {
             savedDarkData.setOrangeModeState(false)
             savedDarkData.setGreenModeState(false)
             savedDarkData.setPurpleModeState(false)
-            val toast = Toast.makeText(requireContext() as MainActivity, "Please restart the app to apply the Default theme", Toast.LENGTH_SHORT)
-            toast.show()
-
+            (activity as MainActivity).recreate();
         }
 
     }

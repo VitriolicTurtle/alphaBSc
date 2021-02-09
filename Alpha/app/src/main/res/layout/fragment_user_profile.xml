@@ -7,8 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="ExtraText"><![CDATA[
-        tools:context=".fragments.UserFragment">
-        ]]>
+        tools:context=".fragments.UserFragment">]]>
 
         <ScrollView
             android:id="@+id/scrollView3"
@@ -21,7 +20,7 @@
 
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/friends_button"
             android:layout_width="107dp"
             android:layout_height="53dp"
             android:layout_marginStart="24dp"
@@ -31,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/settings_button"
             android:layout_width="107dp"
             android:layout_height="53dp"
             android:layout_marginTop="208dp"
@@ -41,13 +40,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/user_info_button"
             android:layout_width="107dp"
             android:layout_height="53dp"
             android:layout_marginTop="208dp"
             android:layout_marginEnd="20dp"
             android:text="User info"
-            app:layout_constraintEnd_toStartOf="@+id/button7"
+            app:layout_constraintEnd_toStartOf="@+id/settings_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -65,7 +64,7 @@
             android:layout_width="121dp"
             android:layout_height="35dp"
             android:layout_marginStart="24dp"
-            android:layout_marginBottom="164dp"
+            android:layout_marginBottom="140dp"
             android:text="Score"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/scrollView3"
@@ -76,10 +75,11 @@
             android:layout_width="191dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
-            android:layout_marginBottom="112dp"
+            android:layout_marginBottom="84dp"
+            android:background="@drawable/textview_border"
+            android:gravity="center"
             android:text="Numbers"
             android:textSize="30sp"
-            android:background="@drawable/textview_border"
             app:layout_constraintBottom_toTopOf="@+id/scrollView3"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -88,7 +88,7 @@
             android:layout_width="130dp"
             android:layout_height="35dp"
             android:layout_marginStart="24dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="20dp"
             android:text="Achievements"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/scrollView3"

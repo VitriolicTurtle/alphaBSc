@@ -17,20 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        ///setContentView(R.layout.activity_main)
-        //setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_fragment)
-        val appBarConfig = AppBarConfiguration(navController.graph, binding.mainDrawerLayout)
-
-
-        //binding.toolbar.setupWithNavController(navController, appBarConfig)
-        binding.navigationView.setupWithNavController(navController)
-        binding.bottomNav.setupWithNavController(navController)
-
 
         savedDarkData = sharedprefs(this)
         if(savedDarkData.loadDarkModeState() == true){
@@ -50,6 +36,23 @@ class MainActivity : AppCompatActivity() {
         } else{
             setTheme((R.style.AppTheme))
         }
+
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        ///setContentView(R.layout.activity_main)
+        //setSupportActionBar(binding.toolbar)
+
+        val navController = findNavController(R.id.nav_fragment)
+        val appBarConfig = AppBarConfiguration(navController.graph, binding.mainDrawerLayout)
+
+
+        //binding.toolbar.setupWithNavController(navController, appBarConfig)
+        binding.navigationView.setupWithNavController(navController)
+        binding.bottomNav.setupWithNavController(navController)
+
+
+
     }
 
     /*

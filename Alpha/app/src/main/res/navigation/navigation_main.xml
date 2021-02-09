@@ -60,6 +60,7 @@
 
     <fragment
         android:id="@+id/dest_user_profile"
+        android:name="com.cn.bsc.fragments.UserProfileFragment"
         android:label="User screen"
         tools:layout="@layout/fragment_user_profile" >
         <action
@@ -75,7 +76,7 @@
 
     <fragment
         android:id="@+id/dest_friends_list"
-        android:name="com.cn.bsc.fragments.SettingFragment"
+        android:name="com.cn.bsc.fragments.FriendsListFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_friends_list" />
 
