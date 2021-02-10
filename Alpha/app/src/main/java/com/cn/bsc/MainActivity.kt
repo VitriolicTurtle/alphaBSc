@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.ui.setupWithNavController
 import com.cn.bsc.databinding.ActivityMainBinding
+import com.cn.bsc.fragments.UserProfileFragment
 
 
 class MainActivity : AppCompatActivity() {
