@@ -20,6 +20,9 @@
             android:id="@+id/action_start_to_register"
             app:destination="@id/dest_register" />
         <action
+            android:id="@+id/action_start_to_profile"
+            app:destination="@id/dest_profile" />
+        <action
             android:id="@+id/action_start_to_setting"
             app:destination="@id/dest_settings" />
     </fragment>
@@ -51,6 +54,12 @@
         android:name="com.cn.bsc.fragments.RegisterFragment"
         android:label="Register"
         tools:layout="@layout/fragment_register" />
+
+    <fragment
+        android:id="@+id/dest_profile"
+        android:name="com.cn.bsc.fragments.ProfileFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/dest_settings"

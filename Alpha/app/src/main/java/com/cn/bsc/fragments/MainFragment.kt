@@ -13,22 +13,25 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-
 import com.cn.bsc.R
 import com.cn.bsc.databinding.FragmentMainBinding
 import com.cn.bsc.sharedprefs
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_main.*
-
 
 
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, avedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
-
+        // Initialize Firebase Auth
+        auth = Firebase.auth
 
         val goToLogin = binding.root.findViewById<Button>(R.id.btnLogin)
         val goToRegister = binding.root.findViewById<Button>(R.id.btnRegister)
@@ -39,7 +42,14 @@ class MainFragment : Fragment() {
             //        .replace(R.id.flFragment, loginFragment)
             //        .addToBackStack(null)
             //        .commit()
-            findNavController().navigate(R.id.dest_login)
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                // checking if there is an active user session, if there is user gets sent directly to profile page
+                findNavController().navigate(R.id.dest_user)
+            } else {
+                // else they get sent to login page
+                findNavController().navigate(R.id.dest_login)
+            }
         }
 
         goToRegister.setOnClickListener(){
@@ -51,9 +61,10 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.dest_register)
         }
 
-
         return binding.root
     }
+
+
 
 
 }
