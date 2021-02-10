@@ -11,9 +11,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.ui.setupWithNavController
 import com.cn.bsc.databinding.ActivityMainBinding
+import com.cn.bsc.fragments.UserProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -57,6 +59,23 @@ class MainActivity : AppCompatActivity() {
         } else{
             setTheme((R.style.AppTheme))
         }
+
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        ///setContentView(R.layout.activity_main)
+        //setSupportActionBar(binding.toolbar)
+
+        val navController = findNavController(R.id.nav_fragment)
+        val appBarConfig = AppBarConfiguration(navController.graph, binding.mainDrawerLayout)
+
+
+        //binding.toolbar.setupWithNavController(navController, appBarConfig)
+        binding.navigationView.setupWithNavController(navController)
+        binding.bottomNav.setupWithNavController(navController)
+
+
+
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_fragment).navigateUp()

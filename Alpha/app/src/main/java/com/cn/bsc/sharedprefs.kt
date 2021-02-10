@@ -8,7 +8,6 @@ class sharedprefs(context: MainActivity) {
 
 
 
-    //--------------------------old code
     private var sharedPreferences: SharedPreferences = context.getSharedPreferences("sharedPrefDark", Context.MODE_PRIVATE)
 
 

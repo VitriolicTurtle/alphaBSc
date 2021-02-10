@@ -7,18 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-
 import com.cn.bsc.R
 import com.cn.bsc.databinding.FragmentMainBinding
+import com.cn.bsc.sharedprefs
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_main.*
+
+
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding

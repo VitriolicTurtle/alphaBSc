@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e284c2d7-48d0-479c-8786-0741079108c0" name="Default Changelist" comment="" />
+    <list default="true" id="e284c2d7-48d0-479c-8786-0741079108c0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alpha/app/src/main/res/layout/fragment_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Alpha/app/src/main/res/layout/fragment_user.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +23,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Alpha" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -35,10 +41,15 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="542" y="304" width="440" height="483" key="FileChooserDialogImpl" timestamp="1611401328895">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="440" y="99" key="#Project_Structure" timestamp="1612181829200">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="440" y="99" key="#Project_Structure/0.0.1920.1050@0.0.1920.1050" timestamp="1612181829200" />
+    <state x="542" y="307" width="440" height="483" key="FileChooserDialogImpl" timestamp="1612264568246">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="542" y="304" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1611401328895" />
+    <state x="542" y="307" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1612264568246" />
     <state x="722" y="409" width="440" height="483" key="FileChooserDialogImpl/0.0.2560.1400/-1920.437.1920.1040@0.0.2560.1400" timestamp="1610132908038" />
   </component>
 </project>

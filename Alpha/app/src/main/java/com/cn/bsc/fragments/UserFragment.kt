@@ -37,13 +37,6 @@ class UserFragment : Fragment() {
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
         readData(userID)
 
-        val buttonLogout = binding.root.findViewById<Button>(R.id.btn_logout)
-
-        buttonLogout.setOnClickListener() {
-            auth.signOut()
-            (activity as MainActivity?)!!.hideMenu()
-            findNavController().navigate(R.id.dest_start)
-        }
 
         return binding.root
     }
@@ -56,20 +49,25 @@ class UserFragment : Fragment() {
                 // if query is successful, reads the data and stores in variables
                 val name = task.result?.get("name")
                 val email = task.result?.get("email")
-                val score = task.result?.get("score")
+                //val score = task.result?.get("score")
                 // getting the reference to the textViews
                 val userName = binding.root.findViewById<TextView>(R.id.user_name)
                 val userEmail = binding.root.findViewById<TextView>(R.id.user_email)
+               // val userScore = binding.root.findViewById<TextView>(R.id.user_score)
+                // displaying the data in the textViews
+                userName.text = name.toString()
+                userEmail.text = email.toString()
+                //userScore.text = score.toString()
                 val userScore = binding.root.findViewById<TextView>(R.id.user_score)
                 // displaying the data in the textViews
                 userName.text = name.toString()
                 userEmail.text = email.toString()
-                userScore.text = score.toString()
+                //userScore.text = score.toString()
             }
         }
     }
 
-    // old function for getting data from FireStore
+// old function for getting data from FireStore
     private fun getData(userID: String) {
         db.collection("users")
                 .get()

@@ -60,12 +60,8 @@ class LoginFragment : Fragment() {
                 .addOnCompleteListener(
                 ) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
+                        // show bottom navigation menu
                         (activity as MainActivity?)!!.showMenu()
-
-
-                        Toast.makeText(activity,"Logged in!",Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.dest_user)
                         // Sign in success
                         // get current user id
                         val userID = FirebaseAuth.getInstance().currentUser!!.uid
@@ -77,11 +73,11 @@ class LoginFragment : Fragment() {
                                 if (res as Boolean) {
                                     // Sign in success, update UI with the signed-in teacher's information
                                     Toast.makeText(activity, "Logged in as teacher!", Toast.LENGTH_SHORT).show()
-                                    findNavController().navigate(R.id.dest_user)
+                                    findNavController().navigate(R.id.dest_user_profile)
                                 } else {
                                     // Sign in success, update UI with the signed-in user's information
                                     Toast.makeText(activity, "Logged in as student!", Toast.LENGTH_SHORT).show()
-                                    findNavController().navigate(R.id.dest_user)
+                                    findNavController().navigate(R.id.dest_user_profile)
                                 }
                             } else {
                                 // database read fail
