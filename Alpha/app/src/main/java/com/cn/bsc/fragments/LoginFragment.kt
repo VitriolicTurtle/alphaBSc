@@ -60,8 +60,6 @@ class LoginFragment : Fragment() {
                 .addOnCompleteListener(
                 ) { task ->
                     if (task.isSuccessful) {
-                        // show bottom navigation menu
-                        (activity as MainActivity?)!!.showMenu()
                         // Sign in success
                         // get current user id
                         val userID = FirebaseAuth.getInstance().currentUser!!.uid

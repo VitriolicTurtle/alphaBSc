@@ -21,7 +21,7 @@
             app:destination="@id/dest_register" />
         <action
             android:id="@+id/action_start_to_profile"
-            app:destination="@id/dest_profile" />
+            app:destination="@id/dest_user_profile" />
         <action
             android:id="@+id/action_start_to_setting"
             app:destination="@id/dest_settings" />

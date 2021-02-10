@@ -25,21 +25,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        ///setContentView(R.layout.activity_main)
-        //setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_fragment)
-        val appBarConfig = AppBarConfiguration(navController.graph, binding.mainDrawerLayout)
-
-
-        //binding.toolbar.setupWithNavController(navController, appBarConfig)
-        binding.navigationView.setupWithNavController(navController)
-        binding.bottomNav.setupWithNavController(navController)
-
-        /*      change this after sessions have been made */
-        //this.hideMenu()
 
         savedDarkData = sharedprefs(this)
         if(savedDarkData.loadDarkModeState() == true){
@@ -60,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             setTheme((R.style.AppTheme))
         }
 
-        super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ///setContentView(R.layout.activity_main)
@@ -74,7 +59,9 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navController)
         binding.bottomNav.setupWithNavController(navController)
 
-
+        /*      change this after sessions have been made */
+        //this.hideMenu()
+        this.showMenu()
 
     }
 
@@ -84,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         this.bottom_nav.visibility = View.VISIBLE
         val menu = this.navigation_view.menu
         menu.findItem(R.id.dest_classroom_index).isVisible = true
-        menu.findItem(R.id.dest_profile).isVisible = true
+        menu.findItem(R.id.dest_user_profile).isVisible = true
         menu.findItem(R.id.dest_settings).isVisible = true
     }
 
@@ -92,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         this.bottom_nav.visibility = View.INVISIBLE
         val menu = this.navigation_view.menu
         menu.findItem(R.id.dest_classroom_index).isVisible = false
-        menu.findItem(R.id.dest_profile).isVisible = false
+        menu.findItem(R.id.dest_user_profile).isVisible = false
         menu.findItem(R.id.dest_settings).isVisible = false
     }
 
