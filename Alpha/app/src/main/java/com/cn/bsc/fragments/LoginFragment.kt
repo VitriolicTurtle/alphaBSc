@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.coroutines.delay
 import kotlin.concurrent.thread
 
 class LoginFragment : Fragment() {
@@ -42,7 +43,8 @@ class LoginFragment : Fragment() {
         val textFieldUsername = binding.root.findViewById<EditText>(R.id.et_login_email)
         val textFieldPassword = binding.root.findViewById<EditText>(R.id.et_login_password)
         val buttonLogin = binding.root.findViewById<Button>(R.id.loginButton)
-        buttonLogin.setOnClickListener() {
+
+        buttonLogin.setOnClickListener() {      // login button listener
             val userEmail = textFieldUsername.text.toString()
             val password = textFieldPassword.text.toString()
             // logging in using the data entered in the text fields
@@ -52,7 +54,6 @@ class LoginFragment : Fragment() {
                 Toast.makeText(activity, "Username or password can't be empty!", Toast.LENGTH_LONG).show()
             }
         }
-
         return binding.root
     }
 
@@ -65,38 +66,37 @@ class LoginFragment : Fragment() {
                         val userID = FirebaseAuth.getInstance().currentUser!!.uid  // get current user id
                         DBObject.getUserData(userID)
                         // check if user data has been loaded, and if user is teacher or student
-
-                        /*
-                        if (MainActivity().userObject.isUSerLoaded()) {
-                           if (MainActivity().userObject.checkForTeacher()) {
-                                    logInAsTeacher() // sign in as teacher
-                                } else logInAsStudent() // sign in as student
-                        } else Log.w("Failed to read database", "Error checking specified user in database") // database read fail
-                         */
-
-                        db.collection("users").document(userID).get().addOnCompleteListener() { task ->
-                            if (task.isSuccessful) {
-                                // if query is successful, reads the data and stores in variables
-                                val res = task.result?.get("teacher")
-                                // check if user logging in is teacher or student
-                                if (res as Boolean) {
-                                    logInAsTeacher() // sign in as teacher
-                                } else logInAsStudent() // sign in as student
-                            } else {
-                                // database read fail
-                                Log.w("Failed to read database", "Error checking specified user in database")
-                            }
-                        }
-
+                        checkTeacherDB(userID)
                         setNavBar()
                     } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(activity,"Login failed!",Toast.LENGTH_SHORT).show()
-                        Log.w("Failed to log in", "Error logging in to specified user")
+                        loginError()
                     }
                 }
     }
 
+    fun checkTeacherObject() {
+        if (MainActivity().userObject.isUSerLoaded()) {
+            if (MainActivity().userObject.checkForTeacher()) {
+                logInAsTeacher() // sign in as teacher
+            } else logInAsStudent() // sign in as student
+        } else Log.w("Failed to read database", "Error checking specified user in database") // database read fail
+    }
+
+    private fun checkTeacherDB(userID: String) {
+        db.collection("users").document(userID).get().addOnCompleteListener() { task ->
+            if (task.isSuccessful) {
+                // if query is successful, reads the data and stores in variables
+                val res = task.result?.get("teacher")
+                // check if user logging in is teacher or student
+                if (res as Boolean) {
+                    logInAsTeacher() // sign in as teacher
+                } else logInAsStudent() // sign in as student
+            } else {
+                // database read fail
+                Log.w("Failed to read database", "Error checking specified user in database")
+            }
+        }
+    }
 
     private fun logInAsTeacher() {
         Toast.makeText(activity, "Logged in as teacher!", Toast.LENGTH_SHORT).show()
@@ -106,6 +106,12 @@ class LoginFragment : Fragment() {
     private fun logInAsStudent() {
         Toast.makeText(activity, "Logged in as student!", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.dest_user)
+    }
+
+    private fun loginError() {
+        // If sign in fails, display a message to the user.
+        Toast.makeText(activity,"Login failed!",Toast.LENGTH_SHORT).show()
+        Log.w("Failed to log in", "Error logging in to specified user")
     }
 
     // set navigation bar to visible

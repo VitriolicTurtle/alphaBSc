@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestore.getInstance
 
 object DBObject {
@@ -25,6 +26,7 @@ object DBObject {
             }
         }
     }
+
 
     // function that retrieves data from user database and displays it
     fun getDocSnapshot(userID: String): Task<DocumentSnapshot> {
@@ -73,7 +75,7 @@ object DBObject {
         val user = hashMapOf(
                 "userid" to userID,
                 "email" to email,
-                "name" to name,
+                "name" to capitalize(name),
                 "score" to 0,
                 "teacher" to isTeacher
         )

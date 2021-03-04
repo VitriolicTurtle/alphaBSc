@@ -15,7 +15,7 @@ object User {
         userEmail = email
         userScore = score
         isTeacher = teacher
-        if (userID != ""){
+        if (userID != "") {
             userLoaded = true
         }
     }
