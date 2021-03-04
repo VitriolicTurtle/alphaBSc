@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.cn.bsc.MainActivity
 import com.cn.bsc.R
 import com.cn.bsc.databinding.FragmentUserBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -34,16 +35,28 @@ class UserFragment : Fragment() {
 
         // get current user id
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
-        readData(userID)
+        showUserData()
 
         val buttonLogout = binding.root.findViewById<Button>(R.id.btn_logout)
 
         buttonLogout.setOnClickListener() {
             auth.signOut()
+            MainActivity().userObject.logoutUser()
             findNavController().navigate(R.id.dest_start)
         }
 
         return binding.root
+    }
+
+    private fun showUserData() {
+        // getting the reference to the textViews
+        val userName = binding.root.findViewById<TextView>(R.id.user_name)
+        val userEmail = binding.root.findViewById<TextView>(R.id.user_email)
+        val userScore = binding.root.findViewById<TextView>(R.id.user_score)
+        // displaying the data in the textViews
+        userName.text = MainActivity().userObject.getName()
+        userEmail.text = MainActivity().userObject.getEmail()
+        userScore.text = MainActivity().userObject.getScore().toString()
     }
 
     // function that retrieves data from user database and displays it

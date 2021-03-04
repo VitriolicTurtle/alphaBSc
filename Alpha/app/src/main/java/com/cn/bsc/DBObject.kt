@@ -10,6 +10,22 @@ object DBObject {
 
     private lateinit var auth: FirebaseAuth
 
+
+    fun getUserData(userID: String) {
+        val db = getInstance()
+        db.collection("users").document(userID).get().addOnCompleteListener() { task ->
+            if (task.isSuccessful) {
+                // if query is successful, reads the data and stores in variables
+                val name = task.result?.get("name").toString()
+                val email = task.result?.get("email").toString()
+                val score = task.result?.get("score").toString().toInt()
+                val teacher = task.result?.get("teacher") as Boolean
+
+                MainActivity().userObject.setUser(userID, name, email, score, teacher)
+            }
+        }
+    }
+
     // function that retrieves data from user database and displays it
     fun getDocSnapshot(userID: String): Task<DocumentSnapshot> {
         val db = getInstance()
