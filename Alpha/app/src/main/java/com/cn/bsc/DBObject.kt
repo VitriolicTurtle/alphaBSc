@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestore.getInstance
 
@@ -11,18 +12,18 @@ object DBObject {
 
     private lateinit var auth: FirebaseAuth
 
-
+    // getting all data from a user and storing it in a user object
     fun getUserData(userID: String) {
         val db = getInstance()
         db.collection("users").document(userID).get().addOnCompleteListener() { task ->
             if (task.isSuccessful) {
                 // if query is successful, reads the data and stores in variables
-                val name = task.result?.get("name").toString()
-                val email = task.result?.get("email").toString()
-                val score = task.result?.get("score").toString().toInt()
-                val teacher = task.result?.get("teacher") as Boolean
-
-                MainActivity().userObject.setUser(userID, name, email, score, teacher)
+                MainActivity().userObject.setUser(userID,
+                        task.result?.get("name").toString(), // name
+                        task.result?.get("email").toString(),  // email
+                        task.result?.get("score").toString().toInt(),  // score
+                        task.result?.get("teacher") as Boolean  // is teacher or not
+                )
             }
         }
     }
@@ -62,6 +63,7 @@ object DBObject {
         return db.collection("users").document(userID).get().result!!.get("score").toString().toInt()
     }
 
+    // set a given users score
     fun setScore(userID: String, newScore: Int) {
         val db = getInstance()
         db.collection("users")
@@ -69,15 +71,19 @@ object DBObject {
                 .update("score", newScore)
     }
 
+    // creating a database entry for a new user
     fun createDatabaseEntry(email: String, name: String, isTeacher: Boolean, userID: String) {
         val db = getInstance()
+
+        val courseList: List<String> = emptyList()
         // Create a new user entry in the database
         val user = hashMapOf(
                 "userid" to userID,
                 "email" to email,
                 "name" to capitalize(name),
                 "score" to 0,
-                "teacher" to isTeacher
+                "teacher" to isTeacher,
+                "courses" to courseList
         )
         // add selected data to database
         db.collection("users").document(userID)
@@ -86,10 +92,11 @@ object DBObject {
                 .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
     }
 
+    // add a new classroom to the database
     fun addClassroom(courseName: String, grade: String, teacher: String, year: Int) {
         val db = getInstance()
         // create data entry for the course
-        val studentList: ArrayList<String> = arrayListOf()
+        val studentList: List<String> = emptyList()
         //val userID = findUserByName(capitalize(teacher))
 
         val course = hashMapOf(
@@ -106,6 +113,22 @@ object DBObject {
                 .addOnFailureListener { e -> Log.w("Failed adding to DB", "Error writing document", e) }
     }
 
+    // function for adding students to a class
+    fun addStudents(className: String, studentList: List<String>) {
+        val db = getInstance()
+
+        for (item in studentList) {
+            db.collection("classrooms")
+                    .document(className)
+                    .update("students", FieldValue.arrayUnion(item))
+
+            db.collection("users")
+                    .document(item)
+                    .update("courses", FieldValue.arrayUnion(className))
+        }
+    }
+
+    // find a user by the users name  NOT WORKING
     fun findUserByName(name: String): String{
         val db = getInstance()
         val doc = db.collection("users").whereEqualTo("name", name).get()
@@ -118,6 +141,7 @@ object DBObject {
         return uid
     }
 
+    // capitalize a string
     private fun capitalize(s: String): String {
         return s.split(" ").joinToString(" ") { it.toLowerCase().capitalize() }
     }

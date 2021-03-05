@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.ui.setupWithNavController
 import com.cn.bsc.databinding.ActivityMainBinding
+import com.cn.bsc.fragments.DBTest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_fragment)
         val appBarConfig = AppBarConfiguration(navController.graph, binding.mainDrawerLayout)
-
 
         //binding.toolbar.setupWithNavController(navController, appBarConfig)
         binding.navigationView.setupWithNavController(navController)

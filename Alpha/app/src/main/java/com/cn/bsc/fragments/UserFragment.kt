@@ -33,6 +33,8 @@ class UserFragment : Fragment() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
+        val test = DBTest()
+
         // get current user id
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
         showUserData()
