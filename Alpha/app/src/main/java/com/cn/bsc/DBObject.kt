@@ -43,9 +43,14 @@ object DBObject {
     // function that retrieves data from user database and displays it
     fun getUserName(userID: String): String {
         val db = getInstance()
+        var name = ""
         // returning the query as a string
-
-        return db.collection("users").document(userID).get().result!!.get("name").toString()
+        db.collection("users").document(userID).get().addOnCompleteListener() { task ->
+            if (task.isSuccessful) {
+                name = task.result?.get("name").toString()
+            }
+        }
+        return name
     }
 
     // function that retrieves data from user database and displays it

@@ -61,7 +61,7 @@ class UserFragment : Fragment() {
         userScore.text = MainActivity().userObject.getScore().toString()
     }
 
-    // function that retrieves data from user database and displays it
+    // old function that retrieves data from user database and displays it
     private fun readData(userID: String) {
         // making the query
         db.collection("users").document(userID).get().addOnCompleteListener() { task ->
